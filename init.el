@@ -5,7 +5,7 @@
 ;; Install straight.el
 
 ;;; Code:
-
+(setq gc-cons-threshold 100000000)
 (defvar bootstrap-version)
 
 (let ((install-url "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el")
@@ -23,8 +23,9 @@
 (straight-use-package 'use-package)
 
 (setq straight-use-package-by-default t)
-
+(setq use-package-always-ensure t)
 (setq native-comp-async-report-warnings-errors nil)
+
 (require 'use-package)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -64,10 +65,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil
 
+(use-package gruvbox-theme
+  :config
+  (load-theme 'gruvbox t))
+
+(use-package diminish
+  :config
+  (diminish 'auto-revert-mode)
+  (diminish 'evil-collection-unimpaired-mode)
+  (diminish 'eldoc-mode))
+
 (use-package evil
   :init
   (setq evil-move-beyond-eol t
-        evil-normal-state-cursor '(box "black")
+        evil-normal-state-cursor '(box "white")
         evil-insert-state-cursor '(box "#98BE65")
         evil-visual-state-cursor '(box "orange")
         evil-emacs-state-cursor  '(box "purple")
@@ -82,20 +93,23 @@
   (evil-collection-init))
 
 (use-package which-key
+  :diminish which-key-mode
   :config
   (which-key-mode 1))
 
 (use-package helm
   :defer f
+  :diminish helm-mode
   :init
   (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-    helm-move-to-line-cycle-in-source         t ; move to end or beginning of source when reaching top or bottom of source.
+    helm-move-to-line-cycle-in-source         t
     helm-ff-search-library-in-sexp            t ; search for library in `require' and `declare-function' sexp.
     helm-scroll-amount                        8 ; scroll 8 lines other window using M-<next>/M-<prior>
-    helm-ff-file-name-history-use-recentf     t
-    helm-echo-input-in-header-line            t)
+    helm-ff-file-name-history-use-recentf     t)
   :config
   (helm-mode 1))
+
+(use-package helm-rg)
 
 (use-package helm-swoop
   :init
@@ -103,6 +117,7 @@
         helm-swoop-split-with-multiple-windows t))
 
 (use-package company
+  :diminish
   :config
   (global-company-mode))
 
@@ -110,9 +125,12 @@
 
 (use-package projectile
   :init
-  (setq projectile-completion-system 'helm)
+  (setq projectile-completion-system 'helm
+        projectile-project-search-path '("~/repos/"))
   :config
   (projectile-mode 1))
+
+(use-package helm-projectile)
 
 (use-package flycheck
   :init
@@ -120,8 +138,34 @@
   :config
   (global-flycheck-mode))
 
+(use-package lsp-mode
+  :init
+  (setq read-process-output-max (* 1024 1024)
+    lsp-idle-delay 0.500)
+  :config
+  (add-hook 'python-mode-hook #'lsp-deferred))
+
+(use-package poetry)
+
 (load-file "~/personal-emacs/elisp/keys.el")
+
+(byte-recompile-directory "~/personal-emacs/straight/build/lsp-mode")
+(byte-recompile-directory "~/personal-emacs/elisp/")
+(native-compile-async "~/personal-emacs/straight/build/lsp-mode" 'recursively)
 
 (provide 'init)
 
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(helm-minibuffer-history-key "M-p")
+ '(warning-suppress-types '(((flymake flymake)))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

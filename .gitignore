@@ -3,3 +3,8 @@
 /init.el~
 /straight/
 /recentf
+*.elc
+/.lsp-session-v1
+/projectile.cache
+/transient/
+/tutorial/
