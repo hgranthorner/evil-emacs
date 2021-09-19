@@ -36,6 +36,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configure mac modifiers to be what you expect, and turn off the bell noise
 
+(setq ring-bell-function 'ignore)
 (defvar is-mac (equal system-type 'darwin))
 (if (equal system-type 'darwin)
   (setq ring-bell-function 'ignore
@@ -60,7 +61,7 @@
 (electric-pair-mode 1)
 (setq lisp-indent-offset 2)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(setq-default indent-tabs-mode nil)
+(setq indent-tabs-mode nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil
@@ -141,17 +142,15 @@
 (use-package lsp-mode
   :init
   (setq read-process-output-max (* 1024 1024)
-    lsp-idle-delay 0.500)
-  :config
-  (add-hook 'python-mode-hook #'lsp-deferred))
+    lsp-idle-delay 0.500))
 
-(use-package poetry)
+(load-file "~/evil-emacs/elisp/keys.el")
+(load-file "~/evil-emacs/elisp/python.el")
+(load-file "~/evil-emacs/elisp/go.el")
 
-(load-file "~/personal-emacs/elisp/keys.el")
-
-(byte-recompile-directory "~/personal-emacs/straight/build/lsp-mode")
-(byte-recompile-directory "~/personal-emacs/elisp/")
-(native-compile-async "~/personal-emacs/straight/build/lsp-mode" 'recursively)
+; (byte-recompile-directory "~/evil-emacs/straight/build/" 0)
+; (byte-recompile-directory "~/evil-emacs/elisp/")
+; (native-compile-async "~/evil-emacs/straight/build/" 'recursively)
 
 (provide 'init)
 
