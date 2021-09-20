@@ -38,12 +38,13 @@
 
 (setq ring-bell-function 'ignore)
 (defvar is-mac (equal system-type 'darwin))
-(if (equal system-type 'darwin)
-  (setq ring-bell-function 'ignore
-    mac-command-modifier 'control
-    mac-option-modifier 'meta)
-  (use-package exec-path-from-shell
-    :init
+
+(use-package exec-path-from-shell)
+(if is-mac
+  (progn
+    (setq ring-bell-function 'ignore
+      mac-command-modifier 'control
+      mac-option-modifier 'meta)
     (exec-path-from-shell-initialize))
   (setq dired-use-ls-dired nil))
 
@@ -71,7 +72,6 @@
   (load-theme 'gruvbox t))
 
 (use-package diminish
-  :defer nil
   :config
   (diminish 'auto-revert-mode)
   (diminish 'evil-collection-unimpaired-mode)
@@ -133,6 +133,8 @@
 
 (use-package magit)
 
+(use-package paredit)
+
 (use-package projectile
   :init
   (setq projectile-completion-system 'helm
@@ -160,6 +162,7 @@
 (load-file (concat grant/init-file "elisp/python.el"))
 (load-file (concat grant/init-file "elisp/go.el"))
 (load-file (concat grant/init-file "elisp/clojure.el"))
+(load-file (concat grant/init-file "elisp/typescript.el"))
 
 ;; (byte-recompile-directory "~/evil-emacs/straight/build/" 0)
 ;; (byte-recompile-directory "~/evil-emacs/elisp/")

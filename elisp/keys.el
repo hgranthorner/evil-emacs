@@ -34,6 +34,7 @@
 
     "c"   '(:ignore t :wk "code")
     "cd"  'lsp-find-definition
+    "ci"  'lsp-organize-imports
     "cr"  'lsp-find-references
 
     "cf"  '(:ignore t :wk "format")
@@ -73,8 +74,16 @@
   (general-define-key
     :states 'motion
     :keymaps '(emacs-lisp-mode-map lisp-mode-map)
-
     :prefix grant/local-key
+
+    "s"  '(:ignore t :wk "slurp")
+    "sf" 'paredit-forward-slurp-sexp
+    "sb" 'paredit-backward-slurp-sexp
+
+    "b"  '(:ignore t :wk "barf")
+    "bf" 'paredit-forward-barf-sexp
+    "bb" 'paredit-backward-barf-sexp
+
     "e"  '(:ignore t :wk "eval")
     "eb" 'eval-buffer
     "ee" 'eval-last-sexp
