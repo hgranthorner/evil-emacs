@@ -76,6 +76,8 @@
   (diminish 'evil-collection-unimpaired-mode)
   (diminish 'eldoc-mode))
 
+(defvar grant/leader-key "SPC")
+(defvar grant/local-key ",")
 (use-package evil
   :init
   (setq evil-move-beyond-eol t

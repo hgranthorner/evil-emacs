@@ -3,107 +3,78 @@
 ;;; All keybindings for my Emacs set up.
 ;;; Code:
 
-(defmacro grant/create-normal-mode-map (map-sym prefix &rest keys)
-  "Generate the requisite keymaps and bindings for keybindings in normal mode.
-MAP-SYM - an unquoted symbol that will be the basis of the name of the keymap.
-PREFIX  - a string that is the prefix for the rest of the bindings.
-KEYS    - an associative list of strings (the key) to the function (the bindings)."
-  (let* ((m (symbol-name map-sym))
-          (map-name (concat m "-normal-map"))
-          (definer (intern (concat m "-normal-prefix"))))
-    `(progn
-       (defvar ,(intern map-name) (make-sparse-keymap))
-       (general-create-definer ,definer :prefix ,prefix)
-       (,definer :keymaps 'normal
-         "" nil
-         ,@keys))))
-
-(require 'use-package)
-
 (use-package general
   :config
+  (define-key dired-mode-map (kbd "<normal-state> SPC") nil)
+
   (general-define-key
    :keymaps 'helm-map
     "<escape>" 'helm-keyboard-quit)
 
-  ;; (general-define-key
-  ;;   :states 'normal
-  ;;   :keymaps 'override
-  ;;   "SPC" 'leader-normal-prefix)
-
   (general-define-key
     "M-x" 'helm-M-x)
 
-  (grant/create-normal-mode-map local
-    ","
-    "p" 'eval-print-last-sexp)
-
-  (grant/create-normal-mode-map eval
-    ", e"
-    "b" 'eval-buffer
-    "e" 'eval-last-sexp
-    "d" 'eval-defun)
-
-  (grant/create-normal-mode-map leader
-    "SPC"
+  (general-define-key
+    :states 'motion
+    :keymaps 'override
+    :prefix grant/leader-key
     "SPC" 'helm-M-x
+
     "b"   '(:ignore t :wk "buffers")
+    "bb"  'helm-mini
+    "bl"  'evil-switch-to-windows-last-buffer
+    "bk"  'kill-buffer
+    "bd"  'kill-buffer
+    "bB"  'ibuffer
+
     "c"   '(:ignore t :wk "code")
+    "cd"  'lsp-find-definition
+    "cr"  'lsp-find-references
+
+    "cf"  '(:ignore t :wk "format")
+    "cfb" 'lsp-format-buffer
+    "cfr" 'lsp-format-region
+
     "f"   '(:ignore t :wk "files")
-    "g"   'magit-status
+    "ff"  'helm-find-files
+    "fd"  'dired
+    "fs"  'save-buffer
+
+    "g"   '(:ignore t :wk "git")
+    "gg"   'magit-status
+
     "h"   '(:ignore t :wk "help")
+    "ha"  'helm-apropos
+    "hk"  'describe-key
+    "hf"  'describe-function
+    "hv"  'describe-variable
+    "hg"  'general-describe-keybindings
+
     "s"   '(:ignore t :wk "search")
-    "h"   'helm-apropos
+    "ss"  'helm-swoop
+    "sp"  'helm-projectile-rg
+
     "o"   'other-window
     "p"   '(:keymap projectile-command-map :wk "projectile")
     "q"   'save-buffers-kill-terminal
-    "w"   '(:ignore t :wk "windows"))
 
-  (grant/create-normal-mode-map search
-    "SPC s"
-    "s" 'helm-swoop
-    "p" 'helm-projectile-rg)
+    "w"   '(:ignore t :wk "windows")
+    "wv"  'split-window-horizontally
+    "ws"  'split-window-vertically
+    "wm"  'delete-other-windows
+    "wd"  'delete-window
+    "wk"  'delete-window)
 
-  (grant/create-normal-mode-map code
-    "SPC c"
-    "d" 'lsp-find-definition
-    "f" '(:ignore t :wk "format")
-    "r" 'lsp-find-references)
+  (general-define-key
+    :states 'motion
+    :keymaps '(emacs-lisp-mode)
+    :prefix grant/local-key
+    "e"  '(:ignore t :wk "eval")
+    "eb" 'eval-buffer
+    "ee" 'eval-last-sexp
+    "ed" 'eval-defun
 
-  (grant/create-normal-mode-map code-format
-    "SPC c f"
-    "b" 'lsp-format-buffer
-    "r" 'lsp-format-region)
-
-  (grant/create-normal-mode-map help
-    "SPC h"
-    "a" 'helm-apropos
-    "k" 'describe-key
-    "f" 'describe-function
-    "v" 'describe-variable
-    "g" 'general-describe-keybindings)
-
-  (grant/create-normal-mode-map buffer
-    "SPC b"
-    "b" 'helm-mini
-    "l" 'evil-switch-to-windows-last-buffer
-    "k" 'kill-buffer
-    "d" 'kill-buffer
-    "B" 'ibuffer)
-
-  (grant/create-normal-mode-map file
-    "SPC f"
-    "f" 'helm-find-files
-    "d" 'dired
-    "s" 'save-buffer)
-
-  (grant/create-normal-mode-map window
-    "SPC w"
-    "v" 'split-window-horizontally
-    "s" 'split-window-vertically
-    "m" 'delete-other-windows
-    "d" 'delete-window
-    "k" 'delete-window))
+    "p"  'eval-print-last-sexp))
 
 (provide 'keys)
 ;;; keys.el ends here
