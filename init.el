@@ -156,6 +156,8 @@
   (setq read-process-output-max (* 1024 1024)
     lsp-idle-delay 0.500))
 
+(use-package darkroom)
+
 (defvar grant/init-file
   (file-name-directory
     (or load-file-name (buffer-file-name))))
