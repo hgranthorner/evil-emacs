@@ -95,6 +95,12 @@
   :config
   (evil-collection-init))
 
+(use-package evil-multiedit
+  :init
+  (setq evil-multiedit-follow-matches t)
+  :config
+  (evil-multiedit-default-keybinds))
+
 (use-package which-key
   :diminish which-key-mode
   :config
@@ -146,9 +152,11 @@
   (setq read-process-output-max (* 1024 1024)
     lsp-idle-delay 0.500))
 
-(load-file "~/evil-emacs/elisp/keys.el")
-(load-file "~/evil-emacs/elisp/python.el")
-(load-file "~/evil-emacs/elisp/go.el")
+(defvar grant/init-file (file-name-directory (or load-file-name (buffer-file-name))))
+
+(load-file (concat grant/init-file "elisp/keys.el"))
+(load-file (concat grant/init-file "elisp/python.el"))
+(load-file (concat grant/init-file "elisp/go.el"))
 
 ; (byte-recompile-directory "~/evil-emacs/straight/build/" 0)
 ; (byte-recompile-directory "~/evil-emacs/elisp/")

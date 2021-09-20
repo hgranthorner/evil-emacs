@@ -5,6 +5,8 @@
 
 (use-package general
   :config
+  (general-auto-unbind-keys)
+
   (define-key dired-mode-map (kbd "<normal-state> SPC") nil)
 
   (general-define-key
@@ -67,7 +69,8 @@
 
   (general-define-key
     :states 'motion
-    :keymaps '(emacs-lisp-mode)
+    :keymaps '(emacs-lisp-mode-map lisp-mode-map)
+
     :prefix grant/local-key
     "e"  '(:ignore t :wk "eval")
     "eb" 'eval-buffer
