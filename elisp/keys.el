@@ -20,6 +20,9 @@
     :states 'motion
     :keymaps 'override
     :prefix grant/leader-key
+
+    "k"   'helm-show-kill-ring
+    "o"   'other-window
     "SPC" 'helm-M-x
 
     "b"   '(:ignore t :wk "buffers")
@@ -56,7 +59,6 @@
     "ss"  'helm-swoop
     "sp"  'helm-projectile-rg
 
-    "o"   'other-window
     "p"   '(:keymap projectile-command-map :wk "projectile")
     "q"   'save-buffers-kill-terminal
 
