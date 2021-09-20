@@ -1,6 +1,6 @@
 ;;; init.el --- Initialization file for Emacs
 ;;; Commentary:
-;   Emacs Startup File --- initialization for Emacs
+;;   Emacs Startup File --- initialization for Emacs
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Install straight.el
 
@@ -81,12 +81,12 @@
 (use-package evil
   :init
   (setq evil-move-beyond-eol t
-        evil-normal-state-cursor '(box "white")
-        evil-insert-state-cursor '(box "#98BE65")
-        evil-visual-state-cursor '(box "orange")
-        evil-emacs-state-cursor  '(box "purple")
-        evil-undo-system         'undo-redo
-        evil-want-keybinding     nil)
+    evil-normal-state-cursor '(box "white")
+    evil-insert-state-cursor '(box "#98BE65")
+    evil-visual-state-cursor '(box "orange")
+    evil-emacs-state-cursor  '(box "purple")
+    evil-undo-system         'undo-redo
+    evil-want-keybinding     nil)
   :config
   (evil-mode))
 
@@ -123,7 +123,8 @@
 (use-package helm-swoop
   :init
   (setq helm-swoop-use-fuzzy-match t
-        helm-swoop-split-with-multiple-windows t))
+    helm-swoop-split-with-multiple-windows t
+    helm-swoop-speed-or-color t))
 
 (use-package company
   :diminish
@@ -135,7 +136,7 @@
 (use-package projectile
   :init
   (setq projectile-completion-system 'helm
-        projectile-project-search-path '("~/repos/"))
+    projectile-project-search-path '("~/repos/"))
   :config
   (projectile-mode 1))
 
@@ -158,23 +159,23 @@
 (load-file (concat grant/init-file "elisp/python.el"))
 (load-file (concat grant/init-file "elisp/go.el"))
 
-; (byte-recompile-directory "~/evil-emacs/straight/build/" 0)
-; (byte-recompile-directory "~/evil-emacs/elisp/")
-; (native-compile-async "~/evil-emacs/straight/build/" 'recursively)
+;; (byte-recompile-directory "~/evil-emacs/straight/build/" 0)
+;; (byte-recompile-directory "~/evil-emacs/elisp/")
+;; (native-compile-async "~/evil-emacs/straight/build/" 'recursively)
 
 (provide 'init)
 
 ;;; init.el ends here
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(helm-minibuffer-history-key "M-p")
- '(warning-suppress-types '(((flymake flymake)))))
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+  '(helm-minibuffer-history-key "M-p")
+  '(warning-suppress-types '(((flymake flymake)))))
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+  )
