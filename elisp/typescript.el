@@ -57,7 +57,8 @@
   (:states 'motion
     :keymaps '(web-mode-map)
     :prefix grant/local-key
-    "k" #'web-mode-element-kill))
+    "k" #'web-mode-element-kill
+    "c" #'web-mode-element-clone))
 
 (use-package emmet-mode
   :general

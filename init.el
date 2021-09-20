@@ -156,7 +156,9 @@
   (setq read-process-output-max (* 1024 1024)
     lsp-idle-delay 0.500))
 
-(defvar grant/init-file (file-name-directory (or load-file-name (buffer-file-name))))
+(defvar grant/init-file
+  (file-name-directory
+    (or load-file-name (buffer-file-name))))
 
 (load-file (concat grant/init-file "elisp/keys.el"))
 (load-file (concat grant/init-file "elisp/python.el"))
