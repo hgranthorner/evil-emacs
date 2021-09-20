@@ -4,31 +4,43 @@
 ;;
 ;;; Code:
 
+(use-package clojure-mode
+  :init
+  (add-hook 'clojure-mode-hook
+    (lambda () (setq-local lsp-enable-indentation nil))
+    #'lsp-deferred
+    (lambda () (setq-local lisp-indent-offset nil))))
+
 (use-package cider
+  :init
+  (setq clojure-indent-style 'align-arguments)
   :general
   (:states 'motion
-   :keymaps '(clojure-mode-map)
-   :prefix grant/local-key
-   "'"  'cider-jack-in-clj
-   "\"" 'cider-jack-in-cljs
+    :keymaps '(clojure-mode-map)
+    :prefix grant/local-key
+    "'"  'cider-jack-in-clj
+    "\"" 'cider-jack-in-cljs
 
-   "e"  '(:ignore t :wk "eval")
-   "eb" 'cider-eval-buffer
-   "ed" 'cider-eval-defun-at-point
-   "ee" 'cider-eval-last-sexp
+    "e"  '(:ignore t :wk "eval")
+    "eb" 'cider-eval-buffer
+    "ed" 'cider-eval-defun-at-point
+    "ee" 'cider-eval-last-sexp
 
-   "i"  '(:ignore t :wk "inspect")
-   "ii" 'cider-inspect
-   "ir" 'cider-inspect-last-result
+    "h"  '(:ignore t :wk "help")
+    "hd" 'cider-doc
 
-   "p"  '(:ignore t :wk "print")
-   "pd" 'cider-pprint-eval-defun-at-point
-   "pp" 'cider-pprint-eval-last-sexp
+    "i"  '(:ignore t :wk "inspect")
+    "ii" 'cider-inspect
+    "ir" 'cider-inspect-last-result
 
-   "r"  '(:ignore t :wk "repl")
-   "rb" 'cider-switch-to-repl-buffer
-   "rn" 'cider-repl-set-ns
-   "rq" 'cider-quit)
+    "p"  '(:ignore t :wk "print")
+    "pd" 'cider-pprint-eval-defun-at-point
+    "pp" 'cider-pprint-eval-last-sexp
+
+    "r"  '(:ignore t :wk "repl")
+    "rb" 'cider-switch-to-repl-buffer
+    "rn" 'cider-repl-set-ns
+    "rq" 'cider-quit)
   (:states 'motion
     :keymaps '(cider-inspector-mode-map)
     "n" 'cider-inspector-next-page

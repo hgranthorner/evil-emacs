@@ -9,8 +9,8 @@
 (defvar bootstrap-version)
 
 (let ((install-url "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el")
-       (bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-       (bootstrap-version 5))
+      (bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer (url-retrieve-synchronously install-url 'silent 'inhibit-cookies)
       (goto-char (point-max))
@@ -82,12 +82,12 @@
 (use-package evil
   :init
   (setq evil-move-beyond-eol t
-    evil-normal-state-cursor '(box "white")
-    evil-insert-state-cursor '(box "#98BE65")
-    evil-visual-state-cursor '(box "orange")
-    evil-emacs-state-cursor  '(box "purple")
-    evil-undo-system         'undo-redo
-    evil-want-keybinding     nil)
+	evil-normal-state-cursor '(box "white")
+	evil-insert-state-cursor '(box "#98BE65")
+	evil-visual-state-cursor '(box "orange")
+	evil-emacs-state-cursor  '(box "purple")
+	evil-undo-system         'undo-redo
+	evil-want-keybinding     nil)
   :config
   (evil-mode))
 
@@ -112,9 +112,9 @@
   :diminish helm-mode
   :init
   (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-    helm-ff-search-library-in-sexp            t ; search for library in `require' and `declare-function' sexp.
-    helm-scroll-amount                        8 ; scroll 8 lines other window using M-<next>/M-<prior>
-    helm-ff-file-name-history-use-recentf     t)
+	helm-ff-search-library-in-sexp            t ; search for library in `require' and `declare-function' sexp.
+	helm-scroll-amount                        8 ; scroll 8 lines other window using M-<next>/M-<prior>
+	helm-ff-file-name-history-use-recentf     t)
   :config
   (helm-mode 1))
 
@@ -123,11 +123,13 @@
 (use-package helm-swoop
   :init
   (setq helm-swoop-use-fuzzy-match t
-    helm-swoop-split-with-multiple-windows t
-    helm-swoop-speed-or-color t))
+	helm-swoop-split-with-multiple-windows t
+	helm-swoop-speed-or-color t))
 
 (use-package company
   :diminish
+  :init
+  (setq company-minimum-prefix-length 2)
   :config
   (global-company-mode))
 
@@ -138,7 +140,7 @@
 (use-package projectile
   :init
   (setq projectile-completion-system 'helm
-    projectile-project-search-path '("~/repos/" "~/dev/"))
+	projectile-project-search-path '("~/repos/" "~/dev/"))
   :config
   (projectile-mode 1))
 
@@ -154,7 +156,7 @@
 (use-package lsp-mode
   :init
   (setq read-process-output-max (* 1024 1024)
-    lsp-idle-delay 0.500))
+	lsp-idle-delay 0.500))
 
 (use-package darkroom)
 
@@ -176,15 +178,15 @@
 
 ;;; init.el ends here
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  '(helm-minibuffer-history-key "M-p")
-  '(warning-suppress-types '(((flymake flymake)))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(helm-minibuffer-history-key "M-p")
+ '(warning-suppress-types '(((flymake flymake)))))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  )
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

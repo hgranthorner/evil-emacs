@@ -33,6 +33,7 @@
     "bB"  'ibuffer
 
     "c"   '(:ignore t :wk "code")
+    "ca"  'lsp-execute-code-action
     "cd"  'lsp-find-definition
     "ci"  'lsp-organize-imports
     "cr"  'lsp-find-references
