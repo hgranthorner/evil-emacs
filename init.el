@@ -71,6 +71,7 @@
   (load-theme 'gruvbox t))
 
 (use-package diminish
+  :defer nil
   :config
   (diminish 'auto-revert-mode)
   (diminish 'evil-collection-unimpaired-mode)
@@ -142,6 +143,7 @@
 (use-package helm-projectile)
 
 (use-package flycheck
+  :diminish
   :init
   (setq flycheck-emacs-lisp-load-path 'inherit)
   :config
