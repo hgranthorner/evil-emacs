@@ -52,6 +52,7 @@
     "ha"  'helm-apropos
     "hk"  'describe-key
     "hf"  'describe-function
+    "hm"  'describe-mode
     "hv"  'describe-variable
     "hg"  'general-describe-keybindings
 

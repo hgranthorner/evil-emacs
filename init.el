@@ -135,7 +135,7 @@
 (use-package projectile
   :init
   (setq projectile-completion-system 'helm
-    projectile-project-search-path '("~/repos/"))
+    projectile-project-search-path '("~/repos/" "~/dev/"))
   :config
   (projectile-mode 1))
 
@@ -157,6 +157,7 @@
 (load-file (concat grant/init-file "elisp/keys.el"))
 (load-file (concat grant/init-file "elisp/python.el"))
 (load-file (concat grant/init-file "elisp/go.el"))
+(load-file (concat grant/init-file "elisp/clojure.el"))
 
 ;; (byte-recompile-directory "~/evil-emacs/straight/build/" 0)
 ;; (byte-recompile-directory "~/evil-emacs/elisp/")
