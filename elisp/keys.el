@@ -70,7 +70,10 @@
     "ws"  'split-window-vertically
     "wm"  'delete-other-windows
     "wd"  'delete-window
-    "wk"  'delete-window)
+    "wh"  'evil-window-left
+    "wj"  'evil-window-down
+    "wk"  'evil-window-up
+    "wl"  'evil-window-right)
 
   (general-define-key
     :states 'motion

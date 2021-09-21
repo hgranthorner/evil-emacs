@@ -135,7 +135,8 @@
 
 (use-package magit
   :config
-  (define-key magit-mode-map (kbd "SPC") nil))
+  (define-key magit-mode-map (kbd "SPC") nil)
+  (define-key magit-diff-section-base-map (kbd "SPC") nil))
 
 (use-package paredit)
 
