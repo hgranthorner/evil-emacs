@@ -133,7 +133,9 @@
   :config
   (global-company-mode))
 
-(use-package magit)
+(use-package magit
+  :config
+  (define-key magit-mode-map (kbd "SPC") nil))
 
 (use-package paredit)
 
