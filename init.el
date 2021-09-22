@@ -129,7 +129,7 @@
 (use-package company
   :diminish
   :init
-  (setq company-minimum-prefix-length 2)
+  (setq company-minimum-prefix-length 1)
   :config
   (global-company-mode))
 
@@ -142,8 +142,10 @@
 
 (use-package projectile
   :init
+  (require 'uniquify)
   (setq projectile-completion-system 'helm
-	projectile-project-search-path '("~/repos/" "~/dev/"))
+    projectile-project-search-path '("~/repos/" "~/dev/")
+    uniquify-buffer-name-style 'forward)
   :config
   (projectile-mode 1))
 
