@@ -9,3 +9,5 @@
 /transient/
 /tutorial/
 /eshell/
+/.cache/
+/elpa/

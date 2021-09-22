@@ -31,7 +31,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fonts
 
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 180)
+
+(require 'ansi-color)
+
+(add-hook 'compilation-filter-hook
+	  #'(lambda () (ansi-color-apply-on-region compilation-filter-start (point))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configure mac modifiers to be what you expect, and turn off the bell noise
@@ -41,12 +46,12 @@
 
 (use-package exec-path-from-shell)
 (if is-mac
-  (progn
-    (setq ring-bell-function 'ignore
-      mac-command-modifier 'control
-      mac-option-modifier 'meta)
-    (exec-path-from-shell-initialize))
-  (setq dired-use-ls-dired nil))
+    (progn
+      (setq ring-bell-function 'ignore
+	    mac-command-modifier 'control
+	    mac-option-modifier 'meta)
+      (exec-path-from-shell-initialize)
+      (setq dired-use-ls-dired nil)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Defaults
@@ -60,7 +65,7 @@
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (electric-pair-mode 1)
-(setq lisp-indent-offset 2)
+(setq lisp-indent-offset nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq indent-tabs-mode nil)
 
@@ -71,11 +76,11 @@
   :config
   (load-theme 'gruvbox t))
 
-(use-package diminish
-  :config
-  (diminish 'auto-revert-mode)
-  (diminish 'evil-collection-unimpaired-mode)
-  (diminish 'eldoc-mode))
+(use-package diminish)
+(require 'diminish)
+(add-hook 'auto-revert-mode-hook (lambda () (diminish 'auto-revert-mode)))
+(add-hook 'evil-collection-unimpaired-mode-hook (lambda () (diminish 'evil-collection-unimpaired-mode)))
+(add-hook 'eldoc-mode-hook (lambda () (diminish 'eldoc-mode)))
 
 (defvar grant/leader-key "SPC")
 (defvar grant/local-key ",")
@@ -144,8 +149,8 @@
   :init
   (require 'uniquify)
   (setq projectile-completion-system 'helm
-    projectile-project-search-path '("~/repos/" "~/dev/")
-    uniquify-buffer-name-style 'forward)
+	projectile-project-search-path '("~/repos/" "~/dev/")
+	uniquify-buffer-name-style 'forward)
   :config
   (projectile-mode 1))
 
@@ -163,11 +168,13 @@
   (setq read-process-output-max (* 1024 1024)
 	lsp-idle-delay 0.500))
 
+(use-package yaml-mode)
+
 (use-package darkroom)
 
 (defvar grant/init-file
   (file-name-directory
-    (or load-file-name (buffer-file-name))))
+   (or load-file-name (buffer-file-name))))
 
 (load-file (concat grant/init-file "elisp/keys.el"))
 (load-file (concat grant/init-file "elisp/python.el"))
