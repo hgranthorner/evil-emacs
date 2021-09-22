@@ -14,7 +14,10 @@
     "<escape>" 'helm-keyboard-quit)
 
   (general-define-key
-    "M-x" 'helm-M-x)
+    :keymaps 'override
+    "M-x"  'helm-M-x
+    "<f2>" 'projectile-run-async-shell-command-in-root
+    "<f5>" 'revert-buffer)
 
   (general-define-key
     :states 'motion
@@ -63,6 +66,7 @@
     "sp"  'helm-projectile-rg
 
     "p"   '(:keymap projectile-command-map :wk "projectile")
+
     "q"   'save-buffers-kill-terminal
 
     "w"   '(:ignore t :wk "windows")
