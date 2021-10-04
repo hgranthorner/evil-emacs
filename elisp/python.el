@@ -27,30 +27,28 @@
    "s"  '(:ignore t :wk "skeleton")
    "si" 'python-skeleton-if
    "sf" 'python-skeleton-for
-   "st" 'python-skeleton-try))
+   "st" 'python-skeleton-try)
 
-(use-package pyimport
-  :defer t
-  :after (python)
-  :config
   (general-define-key
    :states 'motion
    :keymaps 'python-mode-map
    :prefix grant/local-key
    "i" '(:ignore t :wk "imports")
    "ii" #'pyimport-insert-missing
-   "ir" #'pyimport-remove-unused))
+   "ir" #'pyimport-remove-unused)
 
-(use-package py-isort
-  :defer t
-  :after (python)
-  :config
   (general-define-key
    :states 'motion
    :keymaps 'python-mode-map
    :prefix grant/local-key
    "i" '(:ignore t :wk "imports")
    "is" #'py-isort-buffer))
+
+(use-package pyimport
+  :defer t)
+
+(use-package py-isort
+  :defer t)
 
 ;; (use-package lsp-python-ms
 ;;   :ensure t
@@ -60,11 +58,10 @@
   :after 'lsp-mode
   :ensure t)
 
-(use-package poetry
-  :after python
-  :hook (python-mode . poetry-tracking-mode)
-  :config
-  (poetry-tracking-mode))
+;; (use-package poetry
+;;   :after python
+;;   :config
+;;   (poetry-tracking-mode))
 
 (provide 'python)
 

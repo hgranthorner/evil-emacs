@@ -65,9 +65,25 @@
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (electric-pair-mode 1)
+(visual-line-mode 1)
 (setq lisp-indent-offset nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq indent-tabs-mode nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Custom functions
+(defun revert-all-no-confirm ()
+  "Revert all file buffers, without confirmation.
+Buffers visiting files that no longer exist are ignored.
+Files that are not readable (including do not exist) are ignored.
+Other errors while reverting a buffer are reported only as messages."
+  (interactive)
+  (let (file)
+    (dolist (buf  (buffer-list))
+      (setq file  (buffer-file-name buf))
+      (when (and file  (file-readable-p file))
+        (with-current-buffer buf
+          (with-demoted-errors "Error: %S" (revert-buffer t t)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil
@@ -92,7 +108,8 @@
 	evil-visual-state-cursor '(box "orange")
 	evil-emacs-state-cursor  '(box "purple")
 	evil-undo-system         'undo-redo
-	evil-want-keybinding     nil)
+	evil-want-keybinding     nil
+	evil-respect-visual-line-mode t)
   :config
   (evil-mode))
 

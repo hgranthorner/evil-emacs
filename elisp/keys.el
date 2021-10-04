@@ -28,6 +28,7 @@
    "."   'repeat
    "k"   'helm-show-kill-ring
    "o"   'other-window
+   "r"   'helm-resume
    "SPC" 'helm-M-x
    "q"   'save-buffers-kill-terminal
 
@@ -36,6 +37,8 @@
    "bl"  'evil-switch-to-windows-last-buffer
    "bk"  'kill-buffer
    "bd"  'kill-buffer
+   "br"  'rename-buffer
+   "bR"  'revert-buffer
    "bB"  'ibuffer
 
    "c"   '(:ignore t :wk "code")
@@ -71,6 +74,7 @@
    "sp"  'helm-projectile-rg
 
    "p"   '(:keymap projectile-command-map :wk "projectile")
+   "!"   '(:keymap flycheck-command-map :wk "flycheck")
 
    "w"   '(:ignore t :wk "windows")
    "wv"  'split-window-horizontally
