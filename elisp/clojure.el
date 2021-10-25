@@ -5,6 +5,7 @@
 ;;; Code:
 
 (use-package clojure-mode
+  :defer t
   :init
   (add-hook 'clojure-mode-hook
 	    (lambda () (setq-local lsp-enable-indentation nil))

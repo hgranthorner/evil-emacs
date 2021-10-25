@@ -60,6 +60,7 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (setq inhibit-startup-screen t)
 (setq backup-directory-alist '(("." . "~/.emacs_backups")))
+(setq confirm-kill-emacs 'yes-or-no-p)
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
@@ -104,12 +105,13 @@ Other errors while reverting a buffer are reported only as messages."
   :init
   (setq evil-move-beyond-eol t
 	evil-normal-state-cursor '(box "white")
-	evil-insert-state-cursor '(box "#98BE65")
+	evil-insert-state-cursor '((bar . 2) "#98BE65")
 	evil-visual-state-cursor '(box "orange")
 	evil-emacs-state-cursor  '(box "purple")
 	evil-undo-system         'undo-redo
 	evil-want-keybinding     nil
-	evil-respect-visual-line-mode t)
+	evil-respect-visual-line-mode t
+	evil-want-Y-yank-to-eol t)
   :config
   (evil-mode))
 
@@ -166,7 +168,7 @@ Other errors while reverting a buffer are reported only as messages."
   :init
   (require 'uniquify)
   (setq projectile-completion-system 'helm
-	projectile-project-search-path '("~/repos/" "~/dev/")
+	projectile-project-search-path '("~/dev/" "~/repos/")
 	uniquify-buffer-name-style 'forward)
   :config
   (projectile-mode 1))
@@ -198,10 +200,11 @@ Other errors while reverting a buffer are reported only as messages."
 (load-file (concat grant/init-file "elisp/go.el"))
 (load-file (concat grant/init-file "elisp/clojure.el"))
 (load-file (concat grant/init-file "elisp/typescript.el"))
+(load-file (concat grant/init-file "elisp/common-lisp.el"))
 
 ;; (byte-recompile-directory "~/evil-emacs/straight/build/" 0)
-;; (byte-recompile-directory "~/evil-emacs/elisp/")
-;; (native-compile-async "~/evil-emacs/straight/build/" 'recursively)
+(byte-recompile-directory "~/evil-emacs/elisp/" 0 1)
+(native-compile-async "~/evil-emacs/elisp/" 'recursively)
 
 (provide 'init)
 

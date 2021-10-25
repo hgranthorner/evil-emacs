@@ -7,6 +7,7 @@
 (require 'general)
 
 (use-package rjsx-mode
+  :defer t
   :hook (rjsx-mode . rainbow-delimiters-mode)
   :config
   (setq js-chain-indent t

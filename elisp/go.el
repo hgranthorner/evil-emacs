@@ -13,6 +13,7 @@
 
 
 (use-package go-mode
+  :defer t
   :config
   (add-hook 'go-mode-hook #'lsp-deferred)
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))

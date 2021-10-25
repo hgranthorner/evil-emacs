@@ -88,7 +88,7 @@
 
   (general-define-key
    :states 'motion
-   :keymaps '(emacs-lisp-mode-map lisp-mode-map)
+   :keymaps '(emacs-lisp-mode-map lisp-mode-map clojure-mode-map)
    :prefix grant/local-key
 
    "s"  '(:ignore t :wk "slurp")
@@ -97,7 +97,12 @@
 
    "b"  '(:ignore t :wk "barf")
    "bf" 'paredit-forward-barf-sexp
-   "bb" 'paredit-backward-barf-sexp
+   "bb" 'paredit-backward-barf-sexp)
+
+  (general-define-key
+   :states 'motion
+   :keymaps 'emacs-lisp-mode-map
+   :prefix grant/local-key
 
    "e"  '(:ignore t :wk "eval")
    "eb" 'eval-buffer
